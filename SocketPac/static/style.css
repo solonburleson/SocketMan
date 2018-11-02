@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    /* outline: 1px solid black; */
+}
+.row{
+    line-height: 0;
+    display: inline-block;
+}
+.wall {
+    background-color: blue;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+}
+.blank {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+}
+.sushi {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('sushi.png');
+    background-size: contain;
+}
+#ninjaman {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('ninja.gif');
+    background-size: contain;
+    position: absolute;
+    left: 40px;
+    top: 40px;
+}
+#score { 
+    color: white;
+    background-color: black;
+    display: inline-block;
+
+}
+#lives { 
+    color: white;
+    background-color: black;
+    display: inline-block;
+
+}
+#gameover { 
+    color: white;
+    background-color: black;
+    display: inline-block;
+
+}
+.onigiri {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('onigiri.png');
+    background-size: contain; 
+}
+
+.pumpkin {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('pumpky.gif');
+    background-size: contain;
+    position: absolute;
+    left: 320px;
+    top: 320px;
+}
+#world{
+    display: inline;
+}
+#scoreboard{
+    display: inline-block;
+    vertical-align: top;
+    background-color: black;
+}
+#pumpkins{
+    display: inline;
+}
+
+#my_name{
+    color: white;
+}
+
+.name{
+    color: white;
+}

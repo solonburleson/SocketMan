@@ -1,0 +1,56 @@
+ <html>
+<head>
+    <title>NinjaMan</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var name = prompt('What is your name?');
+            
+            var socket = io(); //1
+    
+            socket.on('greeting', function (data) { //4
+                console.log(data.msg); //5
+                socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
+            });
+
+            socket.emit('login', { name: name });
+            socket.on('my_name', function(data){
+                $('#my_name').html('<p>'+data.name+'</p>');
+            });
+
+            socket.on('existing_users', function(data){
+                console.log(data);
+                for(var i = 0; i < data.length; i++){
+                    if(data[i] != name){
+                        $('#scoreboard').append('<div class="name">'+data[i]+'</div>');
+                    }
+                }
+            });
+
+            socket.on('new_player', function(data){
+                console.log(data.new_user);
+                $('#scoreboard').append('<div class="name">'+data.new_user+'</div>');
+            });
+
+        })
+    </script>
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id='world'></div>
+    <div id="scoreboard">
+        <div id="my_score">
+            <div id= "my_name"></div>
+            <div id= 'score'></div>
+            <div id= 'lives'></div>
+            <div id= 'gameover'></div>
+        </div>
+    </div>
+    <div id= 'ninjaman'></div>
+    <div id= 'pumpkins'></div>
+    <script src="main.js"></script>
+</body>
+</html>
