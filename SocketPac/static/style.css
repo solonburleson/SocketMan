@@ -5,38 +5,39 @@
 }
 .row{
     line-height: 0;
-    display: inline-block;
+    display: block;
 }
 .wall {
     background-color: blue;
-    height: 40px;
-    width: 40px;
+    height: 4%;
+    width: 4%;
     display: inline-block;
 }
 .blank {
     background-color: black;
-    height: 40px;
-    width: 40px;
+    height: 4%;
+    width: 4%;
     display: inline-block;
 }
 .sushi {
     background-color: black;
-    height: 40px;
-    width: 40px;
+    height: 4%;
+    width: 4%;
     display: inline-block;
     background-image: url('sushi.png');
     background-size: contain;
 }
 #ninjaman {
     background-color: black;
-    height: 40px;
-    width: 40px;
+    height: 2%;
+    width: 2%;
     display: inline-block;
     background-image: url('ninja.gif');
-    background-size: contain;
+    background-size: 90%;
+    background-repeat: no-repeat;
     position: absolute;
-    left: 40px;
-    top: 40px;
+    left: 2%;
+    top: 2%;
 }
 #score { 
     color: white;
@@ -58,26 +59,53 @@
 }
 .onigiri {
     background-color: black;
-    height: 40px;
-    width: 40px;
+    height: 4%;
+    width: 4%;
     display: inline-block;
     background-image: url('onigiri.png');
     background-size: contain; 
 }
 
-.pumpkin {
+.pumpkin_0 {
     background-color: black;
-    height: 40px;
-    width: 40px;
+    height: 2%;
+    width: 2%;
     display: inline-block;
     background-image: url('pumpky.gif');
-    background-size: contain;
+    background-size: 90%;
+    background-repeat: no-repeat;
     position: absolute;
-    left: 320px;
-    top: 320px;
+    left: 50%;
+    top: 50%;
+}
+.pumpkin_1 {
+    background-color: black;
+    height: 2%;
+    width: 2%;
+    display: inline-block;
+    background-image: url('pinky.gif');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+.pumpkin_2 {
+    background-color: black;
+    height: 2%;
+    width: 2%;
+    display: inline-block;
+    background-image: url('scaredy.png');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 50%;
+    top: 50%;
 }
 #world{
-    display: inline;
+    display: inline-block;
+    width: 50%;
+    height: 50%;
 }
 #scoreboard{
     display: inline-block;
@@ -87,7 +115,6 @@
 #pumpkins{
     display: inline;
 }
-
 #my_name{
     color: white;
 }
