@@ -16,41 +16,70 @@
                 socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
             });
 
-            socket.emit('login', { name: name });
+            socket.emit('login', { name: name , score: 0 });
+            socket.emit('user', { name: name , score: 0 });
             socket.on('my_name', function(data){
-                $('#my_name').html('<p>'+data.name+'</p>');
+                $('#my_name').html(data.name);
             });
 
             socket.on('existing_users', function(data){
                 console.log(data);
+                var html_str = "";
                 for(var i = 0; i < data.length; i++){
-                    if(data[i] != name){
-                        $('#scoreboard').append('<div class="name">'+data[i]+'</div>');
+                    if(data[i]['name'] != name){
+                        html_str += '<div class="name">'+data[i]['name']+' Score = '+data[i]['score']+'</div>';
                     }
                 }
+                $('#scoreboard').html(html_str);
             });
 
             socket.on('new_player', function(data){
                 console.log(data.new_user);
-                $('#scoreboard').append('<div class="name">'+data.new_user+'</div>');
+                $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data[i]['lives']+'</div>');
             });
 
+            socket.on('update_scores', function(data){
+                console.log(data);
+                var html_str = "";
+                for(var i = 0; i < data.length; i++){
+                    if(data[i]['name'] != name){
+                        html_str += '<div class="name">'+data[i]['name']+' Score = '+data[i]['score']+' Lives = '+data[i]['lives']+'</div>';
+                    }
+                }
+                $('#scoreboard').html(html_str);
+            });
+
+            socket.on('disconnect', function(){
+                console.log("Disconnecting!")
+                var html_str = "";
+                for(var i = 0; i < data.length; i++){
+                    if(data[i]['name'] != name){
+                        html_str += '<div class="name">'+data[i]['name']+' Score = '+data[i]['score']+'</div>';
+                    }
+                }
+                $('#scoreboard').html(html_str);
+                socket.disconnect();
+            });
+
+            $('#logout').click(function(){
+                socket.emit('logout', { name: name })
+            })
         })
     </script>
     <script src="main.js"></script>
 </head>
 <body>
     <div id='world'></div>
-    <div id="scoreboard">
-        <div id="my_score">
-            <div id= "my_name"></div>
-            <div id= 'score'></div>
-            <div id= 'lives'></div>
-            <div id= 'gameover'></div>
-        </div>
+    <div id="my_score">
+        <div id= "my_name"></div>
+        <div id= 'score'></div>
+        <div id= 'lives'></div>
+        <div id= 'gameover'></div>
     </div>
+    <div id="scoreboard"></div>
     <div id= 'ninjaman'></div>
     <div id= 'pumpkins'></div>
+    <button id="logout">Logout</button>
     <script src="main.js"></script>
 </body>
 </html>
