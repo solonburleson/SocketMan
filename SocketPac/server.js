@@ -36,10 +36,10 @@ io.on('connection', function (socket) { //2
     socket.on("login", function(userdata) {
         socket.handshake.session.userdata = userdata;
         socket.handshake.session.save();
-        console.log(socket.handshake.session.userdata.name);
-        socket.emit('my_name', { name: socket.handshake.session.userdata.name });
-        socket.broadcast.emit('new_player', { new_user: socket.handshake.session.userdata.name });
-        users.push(socket.handshake.session.userdata.name);
+        console.log(socket.handshake.session.userdata);
+        socket.emit('my_name', { name: socket.handshake.session.userdata.name, score: socket.handshake.session.userdata.score, lives: socket.handshake.session.userdata.lives, count: socket.handshake.session.userdata.count });
+        socket.broadcast.emit('new_player', { name: socket.handshake.session.userdata.name, score: socket.handshake.session.userdata.score });
+        users.push(socket.handshake.session.userdata);
         socket.emit('existing_users', users);
     });
 
@@ -48,6 +48,36 @@ io.on('connection', function (socket) { //2
         socket.emit('posted', { info: data.name }); //6
     });
 
+    socket.on('score_change', function (data) {
+        for(var i = 0; i < users.length; i++){
+            if(users[i]['name'] == data['name']){
+                users[i] = data;
+            }
+        }
+        socket.broadcast.emit('update_scores', users);
+    });
+
+    socket.on('game_over', function (data) {
+        console.log(data);
+        for(var i = 0; i < users.length; i++){
+            if(users[i]['name'] == data['name']){
+                users[i] = data;
+            }
+        }
+        socket.broadcast.emit('update_scores', users);
+    });
+
+    socket.on('logout', function(data){
+        console.log("Logging out!")
+        console.log(data)
+        for(var i = 0; i < users.length; i++){
+            if(users[i]['name'] == data['name']){
+                users.splice(i, 1);
+                console.log("Removed user!", users);
+                socket.emit('user_left');
+            }
+        }
+    });
 });
 
 app.get('/', function(req, res) {
