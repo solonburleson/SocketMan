@@ -39,6 +39,8 @@ var worldDict = {
 };
 var socket = io();
 
+var socket = io();
+
 var score = 0, lives = 3;
 
 function drawWorld(){
@@ -98,7 +100,7 @@ function drawPumpkin(){
     for(var index = 0; index < pumpkins.length; index++){
     content += "<div class=" + 'pumpkin_' + index + " style='left:"+pumpkins[index].left * 32+"px; top:"+pumpkins[index].top * 32 +"px'></div>";
     }
-    console.log(content)
+    // console.log(content)
     document.getElementById('pumpkins').innerHTML = content;
 
 }
