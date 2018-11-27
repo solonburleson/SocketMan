@@ -1,4 +1,4 @@
- <html>
+<html>
 <head>
     <title>NinjaMan</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript">
         $(document).ready(function(){
-
             var name = prompt('What is your name?');
             
             var socket = io(); //1
@@ -15,12 +14,11 @@
                 console.log(data.msg); //5
                 socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
             });
-
+            
             socket.emit('login', { name: name , score: 0, lives: 3, count: 0 });
             socket.on('my_name', function(data){
                 $('#my_name').html(data.name);
             });
-
             socket.on('existing_users', function(data){
                 console.log(data);
                 var html_str = "";
@@ -31,12 +29,11 @@
                 }
                 $('#scoreboard').html(html_str);
             });
-
             socket.on('new_player', function(data){
                 console.log(data.new_user);
                 $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data['lives']+'</div>');
             });
-
+            
             socket.on('update_scores', function(data){
                 // console.log(data);
                 var html_str = "";
@@ -81,6 +78,10 @@
                 socket.emit('logout', { name: name })
             });
 
+            $('#logout').click(function(){
+                socket.emit('logout', { name: name })
+            });
+
             $('#up_btn').click(function(){
                 console.log("Clicked up button!");
                 var e = jQuery.Event("keyup");
@@ -109,7 +110,6 @@
                 console.log(e);
                 $(document).trigger(e);
             });
-
         })
     </script>
     <script src="main.js"></script>

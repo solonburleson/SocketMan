@@ -21,23 +21,24 @@
 }
 .sushi {
     background-color: black;
-    height: 4%;
-    width: 4%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('sushi.png');
     background-size: contain;
+    background-repeat: no-repeat;
 }
 #ninjaman {
     background-color: black;
-    height: 2%;
-    width: 2%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('ninja.gif');
     background-size: 90%;
     background-repeat: no-repeat;
     position: absolute;
-    left: 2%;
-    top: 2%;
+    left: 32px;
+    top: 32px;
 }
 #score { 
     color: white;
@@ -59,17 +60,18 @@
 }
 .onigiri {
     background-color: black;
-    height: 4%;
-    width: 4%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('onigiri.png');
     background-size: contain; 
+    background-repeat: no-repeat;
 }
 
 .pumpkin_0 {
     background-color: black;
-    height: 2%;
-    width: 2%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('pumpky.gif');
     background-size: 90%;
@@ -80,8 +82,8 @@
 }
 .pumpkin_1 {
     background-color: black;
-    height: 2%;
-    width: 2%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('pinky.gif');
     background-size: 90%;
@@ -92,8 +94,8 @@
 }
 .pumpkin_2 {
     background-color: black;
-    height: 2%;
-    width: 2%;
+    height: 32px;
+    width: 32px;
     display: inline-block;
     background-image: url('scaredy.png');
     background-size: 90%;
@@ -104,8 +106,8 @@
 }
 #world{
     display: inline-block;
-    width: 50%;
-    height: 50%;
+    width: 800px;
+    height: 800px;
 }
 #scoreboard{
     display: inline-block;
@@ -122,14 +124,25 @@
 .name{
     color: white;
 }
-
+.home{
+    background-color: black;
+    height: 4%;
+    width: 4%;
+    display: inline-block;
+}
+.door{
+    background-color: black;
+    border-top: 3px solid blue;
+    height: 29px;
+    width: 4%;
+    display: inline-block;
+}
 #counter{
     position: absolute;
-    top: 20%;
-    left: 23%;
+    top: 250px;
+    left: 365px;
     color: yellow;
-    font-size: 40px;
-}
+    font-size: 60px;
 
 .move-btn{
     font-size: 48px;
