@@ -6,18 +6,21 @@
 .row{
     line-height: 0;
     display: block;
+    touch-action: manipulation;
 }
 .wall {
     background-color: blue;
     height: 4%;
     width: 4%;
     display: inline-block;
+    touch-action: manipulation;
 }
 .blank {
     background-color: black;
     height: 4%;
     width: 4%;
     display: inline-block;
+    touch-action: manipulation;
 }
 .sushi {
     background-color: black;
@@ -27,6 +30,7 @@
     background-image: url('sushi.png');
     background-size: contain;
     background-repeat: no-repeat;
+    touch-action: manipulation;
 }
 #ninjaman {
     background-color: black;
@@ -39,24 +43,22 @@
     position: absolute;
     left: 32px;
     top: 32px;
+    touch-action: manipulation;
 }
 #score { 
-    color: white;
     background-color: black;
     display: inline-block;
-
+    touch-action: manipulation;
 }
 #lives { 
-    color: white;
     background-color: black;
     display: inline-block;
-
+    touch-action: manipulation;
 }
 #gameover { 
-    color: white;
     background-color: black;
     display: inline-block;
-
+    touch-action: manipulation;
 }
 .onigiri {
     background-color: black;
@@ -66,6 +68,7 @@
     background-image: url('onigiri.png');
     background-size: contain; 
     background-repeat: no-repeat;
+    touch-action: manipulation;
 }
 
 .pumpkin_0 {
@@ -79,6 +82,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    touch-action: manipulation;
 }
 .pumpkin_1 {
     background-color: black;
@@ -91,6 +95,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    touch-action: manipulation;
 }
 .pumpkin_2 {
     background-color: black;
@@ -103,32 +108,41 @@
     position: absolute;
     left: 50%;
     top: 50%;
+    touch-action: manipulation;
 }
 #world{
     display: inline-block;
     width: 800px;
     height: 800px;
+    touch-action: manipulation;
 }
 #scoreboard{
     display: inline-block;
     vertical-align: top;
     background-color: black;
+    touch-action: manipulation;
 }
 #pumpkins{
     display: inline;
+    touch-action: manipulation;
 }
-#my_name{
-    color: white;
+#my_score{
+    color: lightgreen;
+    border: 2px solid lightgreen;
+    margin-bottom: 2%;
+    touch-action: manipulation;
 }
 
 .name{
     color: white;
+    touch-action: manipulation;
 }
 .home{
     background-color: black;
     height: 4%;
     width: 4%;
     display: inline-block;
+    touch-action: manipulation;
 }
 .door{
     background-color: black;
@@ -136,6 +150,7 @@
     height: 29px;
     width: 4%;
     display: inline-block;
+    touch-action: manipulation;
 }
 #counter{
     position: absolute;
@@ -143,13 +158,95 @@
     left: 365px;
     color: yellow;
     font-size: 60px;
+    touch-action: manipulation;
+}
 
 .move-btn{
     font-size: 48px;
-    padding: 20px;
+    padding: 50px;
+    border-radius: 20%;
     touch-action: manipulation;
 }
 
 #container{
     touch-action: manipulation;
 }
+
+#total-score{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    background-color: black;
+    touch-action: manipulation;
+}
+
+#logout{
+    vertical-align: top;
+    margin-left: 2%;
+    padding: 1%;
+    background-color: red;
+    border-color: red;
+    border-radius: 8%;
+    font-weight: bold;
+    color: white;
+    touch-action: manipulation;
+}
+
+#up_btn, #down_btn, #right_btn, #left_btn{
+    touch-action: manipulation;
+}
+
+#up_btn, #down_btn{
+    margin: 0px auto;
+}
+
+#d-pad{
+    margin: 10px auto;
+    width: 50%;
+    padding: 10px;
+    touch-action: manipulation;
+    text-align: center;
+}
+
+@media only screen and (max-width: 480px) {
+    *{
+        touch-action: manipulation;
+    }
+    #container{
+        touch-action: manipulation;
+        height: 100%;
+        margin-bottom: 0px;
+    }
+    #d-pad{
+        display: block;
+        touch-action: manipulation;
+    }
+    .move-btn{
+        touch-action: manipulation;
+    }
+}
+
+@media only screen and (min-width: 481px) {
+    *{
+        touch-action: manipulation;
+    }
+    #container{
+        touch-action: manipulation;
+        height: 100%;
+        margin-bottom: 0px;
+    }
+    #d-pad{
+        display: block;
+        touch-action: manipulation;
+    }
+    .move-btn{
+        touch-action: manipulation;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #d-pad{
+        display: none;
+    }
+}
+
