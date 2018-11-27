@@ -122,3 +122,21 @@
 .name{
     color: white;
 }
+
+#counter{
+    position: absolute;
+    top: 20%;
+    left: 23%;
+    color: yellow;
+    font-size: 40px;
+}
+
+.move-btn{
+    font-size: 48px;
+    padding: 20px;
+    touch-action: manipulation;
+}
+
+#container{
+    touch-action: manipulation;
+}

@@ -95,31 +95,34 @@ function drawPumpkin(){
     for(var index = 0; index < pumpkins.length; index++){
     content += "<div class=" + 'pumpkin_' + index + " style='left:"+pumpkins[index].left * 2+"%; top:"+pumpkins[index].top * 2 +"%'></div>";
     }
-    console.log(content)
+    // console.log(content)
     document.getElementById('pumpkins').innerHTML = content;
 
 }
 drawPumpkin();
 
-document.onkeydown = function(e){
-    if(lives > 0){
-        if(e.keyCode == 37 && world[ninjamanpos.top][ninjamanpos.left - 1] != 1){ //LEFT
-            ninjamanpos.left = ninjamanpos.left - 1;
-            start = 1;
+function moveNinja(){
+    document.onkeyup = function(e){
+        console.log(e)
+        if(lives > 0){
+            if(e.which == 37 && world[ninjamanpos.top][ninjamanpos.left - 1] != 1){ //LEFT
+                ninjamanpos.left = ninjamanpos.left - 1;
+                start = 1;
+            }
+            if(e.which == 39 && world[ninjamanpos.top][ninjamanpos.left + 1] != 1){ //RIGHT
+                ninjamanpos.left = ninjamanpos.left + 1;
+            }
+            if(e.which == 38 && world[ninjamanpos.top - 1][ninjamanpos.left] != 1){ //UP
+                ninjamanpos.top = ninjamanpos.top - 1;
+            }
+            if(e.which == 40 && world[ninjamanpos.top + 1][ninjamanpos.left] != 1){ //DOWN
+                ninjamanpos.top = ninjamanpos.top + 1;
+            }
+            update();
+            scorekeeper();
+            world[ninjamanpos.top][ninjamanpos.left] = 0;
+            drawWorld();
         }
-        if(e.keyCode == 39 && world[ninjamanpos.top][ninjamanpos.left + 1] != 1){ //RIGHT
-            ninjamanpos.left = ninjamanpos.left + 1;
-        }
-        if(e.keyCode == 38 && world[ninjamanpos.top - 1][ninjamanpos.left] != 1){ //UP
-            ninjamanpos.top = ninjamanpos.top - 1;
-        }
-        if(e.keyCode == 40 && world[ninjamanpos.top + 1][ninjamanpos.left] != 1){ //DOWN
-            ninjamanpos.top = ninjamanpos.top + 1;
-        }
-        update();
-        scorekeeper();
-        world[ninjamanpos.top][ninjamanpos.left] = 0;
-        drawWorld();
     }
 }
 
@@ -190,9 +193,10 @@ function addnewpumpkin(){
 function gameLoop(){
     count ++;
     var name = document.getElementById('my_name').innerHTML;
-    socket.emit('score_change', { name: name, score: score, lives: lives });
+    socket.emit('score_change', { name: name, score: score, lives: lives, count: count });
     if(lives > 0){
         if(count > 6){
+            moveNinja();
             movePumpkin();
             drawPumpkin();
             reset();

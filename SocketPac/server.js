@@ -37,7 +37,7 @@ io.on('connection', function (socket) { //2
         socket.handshake.session.userdata = userdata;
         socket.handshake.session.save();
         console.log(socket.handshake.session.userdata);
-        socket.emit('my_name', { name: socket.handshake.session.userdata.name, score: socket.handshake.session.userdata.score });
+        socket.emit('my_name', { name: socket.handshake.session.userdata.name, score: socket.handshake.session.userdata.score, lives: socket.handshake.session.userdata.lives, count: socket.handshake.session.userdata.count });
         socket.broadcast.emit('new_player', { name: socket.handshake.session.userdata.name, score: socket.handshake.session.userdata.score });
         users.push(socket.handshake.session.userdata);
         socket.emit('existing_users', users);

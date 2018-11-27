@@ -16,8 +16,7 @@
                 socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
             });
 
-            socket.emit('login', { name: name , score: 0 });
-            socket.emit('user', { name: name , score: 0 });
+            socket.emit('login', { name: name , score: 0, lives: 3, count: 0 });
             socket.on('my_name', function(data){
                 $('#my_name').html(data.name);
             });
@@ -35,15 +34,32 @@
 
             socket.on('new_player', function(data){
                 console.log(data.new_user);
-                $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data[i]['lives']+'</div>');
+                $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data['lives']+'</div>');
             });
 
             socket.on('update_scores', function(data){
-                console.log(data);
+                // console.log(data);
                 var html_str = "";
                 for(var i = 0; i < data.length; i++){
                     if(data[i]['name'] != name){
                         html_str += '<div class="name">'+data[i]['name']+' Score = '+data[i]['score']+' Lives = '+data[i]['lives']+'</div>';
+                    }
+                    else{
+                        if(data[i]['count'] < 2){
+                            $('#counter').html("3")
+                        }
+                        else if(data[i]['count'] < 4){
+                            $('#counter').html("2")
+                        }
+                        else if(data[i]['count'] < 6){
+                            $('#counter').html("1")
+                        }
+                        else if(data[i]['count'] == 6){
+                            $('#counter').html("GO!")
+                        }
+                        else{
+                            $('#counter').html("")
+                        }
                     }
                 }
                 $('#scoreboard').html(html_str);
@@ -63,23 +79,64 @@
 
             $('#logout').click(function(){
                 socket.emit('logout', { name: name })
-            })
+            });
+
+            $('#up_btn').click(function(){
+                console.log("Clicked up button!");
+                var e = jQuery.Event("keyup");
+                e.which = 38;
+                $(document).trigger(e);
+            });
+
+            $('#down_btn').click(function(){
+                console.log("Clicked down button!");
+                var e = jQuery.Event("keyup");
+                e.which = 40;
+                $(document).trigger(e);
+            });
+
+            $('#left_btn').click(function(){
+                console.log("Clicked left button!");
+                var e = jQuery.Event("keyup");
+                e.which = 37;
+                $(document).trigger(e);
+            });
+
+            $('#right_btn').click(function(){
+                console.log("Clicked right button!");
+                var e = jQuery.Event("keyup");
+                e.which = 39;
+                console.log(e);
+                $(document).trigger(e);
+            });
+
         })
     </script>
     <script src="main.js"></script>
 </head>
 <body>
-    <div id='world'></div>
-    <div id="my_score">
-        <div id= "my_name"></div>
-        <div id= 'score'></div>
-        <div id= 'lives'></div>
-        <div id= 'gameover'></div>
+    <div id="container">
+        <div id='world'></div>
+        <div id="my_score">
+            <div id= "my_name"></div>
+            <div id= 'score'></div>
+            <div id= 'lives'></div>
+            <div id= 'gameover'></div>
+        </div>
+        <div id="counter">3</div>
+        <div id="scoreboard"></div>
+        <div id= 'ninjaman'></div>
+        <div id= 'pumpkins'></div>
+        <button id="logout">Logout</button>
+        <div>
+            <button id="up_btn" class="move-btn">&#8679;</button>
+            <div>
+                <button id="left_btn" class="move-btn">&#8678;</button>
+                <button id="right_btn" class="move-btn">&#8680;</button>
+            </div>
+            <button id="down_btn" class="move-btn">&#8681;</button>
+        </div>
     </div>
-    <div id="scoreboard"></div>
-    <div id= 'ninjaman'></div>
-    <div id= 'pumpkins'></div>
-    <button id="logout">Logout</button>
     <script src="main.js"></script>
 </body>
 </html>
