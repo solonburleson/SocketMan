@@ -336,10 +336,13 @@ function gameLoop(){
             reset();
         };
     }
-    else{
-        socket.emit('game_over', { name: name, score: score, lives: 0, count: count });
-        document.getElementById('gameover').innerHTML = "GAME OVER"
+    else if(lives == 0){
+        socket.emit('game_over', { name: name, score: score, lives: lives, count: count });
+        document.getElementById('gameover').innerHTML = "GAME OVER";
+        lives = -1;
     } 
+    else{
+    }
     
     setTimeout(gameLoop, 500);
 }
