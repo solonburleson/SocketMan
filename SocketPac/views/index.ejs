@@ -11,15 +11,16 @@
             var socket = io(); //1
     
             socket.on('greeting', function (data) { //4
-                console.log(data.msg); //5
+                // console.log(data.msg); //5
                 socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
             });
+            
             socket.emit('login', { name: name , score: 0, lives: 3, count: 0 });
             socket.on('my_name', function(data){
                 $('#my_name').html(data.name);
             });
             socket.on('existing_users', function(data){
-                console.log(data);
+                // console.log(data);
                 var html_str = "";
                 for(var i = 0; i < data.length; i++){
                     if(data[i]['name'] != name){
@@ -29,9 +30,10 @@
                 $('#scoreboard').html(html_str);
             });
             socket.on('new_player', function(data){
-                console.log(data.new_user);
+                // console.log(data.new_user);
                 $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data['lives']+'</div>');
             });
+            
             socket.on('update_scores', function(data){
                 // console.log(data);
                 var html_str = "";
@@ -60,7 +62,7 @@
                 $('#scoreboard').html(html_str);
             });
             socket.on('disconnect', function(){
-                console.log("Disconnecting!")
+                // console.log("Disconnecting!")
                 var html_str = "";
                 for(var i = 0; i < data.length; i++){
                     if(data[i]['name'] != name){
@@ -73,29 +75,32 @@
             $('#logout').click(function(){
                 socket.emit('logout', { name: name })
             });
+            $('#logout').click(function(){
+                socket.emit('logout', { name: name })
+            });
             $('#up_btn').click(function(){
-                console.log("Clicked up button!");
+                // console.log("Clicked up button!");
                 var e = jQuery.Event("keyup");
                 e.which = 38;
                 $(document).trigger(e);
             });
             $('#down_btn').click(function(){
-                console.log("Clicked down button!");
+                // console.log("Clicked down button!");
                 var e = jQuery.Event("keyup");
                 e.which = 40;
                 $(document).trigger(e);
             });
             $('#left_btn').click(function(){
-                console.log("Clicked left button!");
+                // console.log("Clicked left button!");
                 var e = jQuery.Event("keyup");
                 e.which = 37;
                 $(document).trigger(e);
             });
             $('#right_btn').click(function(){
-                console.log("Clicked right button!");
+                // console.log("Clicked right button!");
                 var e = jQuery.Event("keyup");
                 e.which = 39;
-                console.log(e);
+                // console.log(e);
                 $(document).trigger(e);
             });
         })
@@ -105,18 +110,20 @@
 <body>
     <div id="container">
         <div id='world'></div>
-        <div id="my_score">
-            <div id= "my_name"></div>
-            <div id= 'score'></div>
-            <div id= 'lives'></div>
-            <div id= 'gameover'></div>
+        <div id="total-score">
+            <div id="my_score">
+                <h2 id= "my_name"></h2>
+                <div id= 'score'></div>
+                <div id= 'lives'></div>
+                <div id= 'gameover'></div>
+            </div>
+            <div id="scoreboard"></div>
         </div>
         <div id="counter">3</div>
-        <div id="scoreboard"></div>
         <div id= 'ninjaman'></div>
         <div id= 'pumpkins'></div>
         <button id="logout">Logout</button>
-        <div>
+        <div id="d-pad">
             <button id="up_btn" class="move-btn">&#8679;</button>
             <div>
                 <button id="left_btn" class="move-btn">&#8678;</button>

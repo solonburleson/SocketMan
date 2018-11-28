@@ -98,45 +98,40 @@ function drawPumpkin(){
     for(var index = 0; index < pumpkins.length; index++){
     content += "<div class=" + 'pumpkin_' + index + " style='left:"+pumpkins[index].left * 32+"px; top:"+pumpkins[index].top * 32 +"px'></div>";
     }
-    console.log(content)
+    // console.log(content)
     document.getElementById('pumpkins').innerHTML = content;
 
 }
 drawPumpkin();
 
-function moveNinja(){
-    document.onkeyup = function(e){
-        console.log(e)
-        if(lives > 0){
-            if(e.which == 37 && world[ninjamanpos.top][ninjamanpos.left - 1] != 1){ //LEFT
-                ninjamanpos.left = ninjamanpos.left - 1;
-                start = 1;
+    console.log(count);
+        document.onkeyup = function(e){
+            if(lives > 0){
+                if(e.which == 37 && world[ninjamanpos.top][ninjamanpos.left - 1] != 1){ //LEFT
+                    ninjamanpos.left = ninjamanpos.left - 1;
+                    start = 1;
+                }
+                if(e.which == 39 && world[ninjamanpos.top][ninjamanpos.left + 1] != 1 && count > 5){ //RIGHT
+                    ninjamanpos.left = ninjamanpos.left + 1;
+                }
+                if(e.which == 38 && world[ninjamanpos.top - 1][ninjamanpos.left] != 1){ //UP
+                    ninjamanpos.top = ninjamanpos.top - 1;
+                }
+                if(e.which == 40 && world[ninjamanpos.top + 1][ninjamanpos.left] != 1 && count > 5){ //DOWN
+                    if(world[ninjamanpos.top + 1][ninjamanpos.left] != 6){
+                        ninjamanpos.top = ninjamanpos.top + 1;
+                    }
+                }
+                update();
+                scorekeeper();
+                world[ninjamanpos.top][ninjamanpos.left] = 0;
+                drawWorld();
             }
-            if(e.which == 39 && world[ninjamanpos.top][ninjamanpos.left + 1] != 1){ //RIGHT
-                ninjamanpos.left = ninjamanpos.left + 1;
-            }
-            if(e.which == 38 && world[ninjamanpos.top - 1][ninjamanpos.left] != 1){ //UP
-                ninjamanpos.top = ninjamanpos.top - 1;
-            }
-            if(e.which == 40 && world[ninjamanpos.top + 1][ninjamanpos.left] != 1){ //DOWN
-                ninjamanpos.top = ninjamanpos.top + 1;
-            }
-            update();
-            scorekeeper();
-            world[ninjamanpos.top][ninjamanpos.left] = 0;
-            drawWorld();
         }
-    }
-}
 
 function movePumpkin(){
-    // console.log(count, "this is count")
-    // if(count == 6){
-    //     pumpkins[0].top = 11;
-    //     pumpkins[0].left = 13;
-    // }
     for(var index = 0; index < pumpkins.length; index++){
-        if(ninjamanpos.top < pumpkins[index].top && ninjamanpos.left < pumpkins[index].left){ // pumpkin is down and right of ninjaman
+        if(ninjamanpos.top < pumpkins[index].top && ninjamanpos.left < pumpkins[index].left && world[pumpkins[index].top - 1][pumpkins[index].left] != 6){ // pumpkin is down and right of ninjaman
             var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
             if(move == 1 && world[pumpkins[index].top - 1][pumpkins[index].left] != 1){ //chase up
                 pumpkins[index].top = pumpkins[index].top -1;
@@ -151,7 +146,7 @@ function movePumpkin(){
                 pumpkins[index].top = pumpkins[index].top -1;
             }
         }
-        else if(ninjamanpos.top < pumpkins[index].top && ninjamanpos.left > pumpkins[index].left){ //pumpkin is down and right of ninjaman
+        else if(ninjamanpos.top < pumpkins[index].top && ninjamanpos.left > pumpkins[index].left && world[pumpkins[index].top - 1][pumpkins[index].left] != 6){ //pumpkin is down and right of ninjaman
             var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
             if(move == 1 && world[pumpkins[index].top - 1][pumpkins[index].left] != 1){ //chase up
                 pumpkins[index].top = pumpkins[index].top -1;
@@ -166,37 +161,41 @@ function movePumpkin(){
                 pumpkins[index].top = pumpkins[index].top -1;
             }
         }
-        else if(ninjamanpos.top > pumpkins[index].top && ninjamanpos.left > pumpkins[index].left){ //pumpkin is up and right of ninjaman
+        else if(ninjamanpos.top > pumpkins[index].top && ninjamanpos.left > pumpkins[index].left && world[pumpkins[index].top - 1][pumpkins[index].left] != 6){ //pumpkin is up and right of ninjaman
             var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
-            if(move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 1){ //chase down
+            if(move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 6){ //chase down
                 pumpkins[index].top = pumpkins[index].top +1;
             }
-            else if (move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] == 1) { //chase right
+            else if (move == 1 && (world[pumpkins[index].top + 1][pumpkins[index].left] == 1 || world[pumpkins[index].top + 1][pumpkins[index].left] == 6)) { //chase right
                 pumpkins[index].left = pumpkins[index].left +1;
             }
             else if (move == 2 && world[pumpkins[index].top][pumpkins[index].left + 1] != 1) { //chase right
                 pumpkins[index].left = pumpkins[index].left +1;
             }
             else { //chase down
-                pumpkins[index].top = pumpkins[index].top +1;
+                if(world[pumpkins[index].top + 1][pumpkins[index].left] != 6){
+                    pumpkins[index].top = pumpkins[index].top +1;
+                }
             }
         }
-        else if(ninjamanpos.top > pumpkins[index].top && ninjamanpos.left < pumpkins[index].left) { //pumpkin is up and left of ninjaman
+        else if(ninjamanpos.top > pumpkins[index].top && ninjamanpos.left < pumpkins[index].left && world[pumpkins[index].top - 1][pumpkins[index].left] != 6) { //pumpkin is up and left of ninjaman
             var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
-            if(move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 1){ //chase down
+            if(move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 1 && world[pumpkins[index].top + 1][pumpkins[index].left] != 6){ //chase down
                 pumpkins[index].top = pumpkins[index].top +1;
             }
-            else if (move == 1 && world[pumpkins[index].top + 1][pumpkins[index].left] == 1) { //chase left
+            else if (move == 1 && (world[pumpkins[index].top + 1][pumpkins[index].left] == 1 || world[pumpkins[index].top + 1][pumpkins[index].left] == 6)) { //chase left
                 pumpkins[index].left = pumpkins[index].left -1;
             }
             else if (move == 2 && world[pumpkins[index].top][pumpkins[index].left - 1] != 1){ //chase left
                 pumpkins[index].left = pumpkins[index].left -1;
             }
             else { //chase down
-                pumpkins[index].top = pumpkins[index].top +1;
+                if(world[pumpkins[index].top + 1][pumpkins[index].left] != 6){
+                    pumpkins[index].top = pumpkins[index].top +1;
+                }
             }
         }
-        else if(ninjamanpos.top == pumpkins[index].top){
+        else if(ninjamanpos.top == pumpkins[index].top && world[pumpkins[index].top - 1][pumpkins[index].left] != 6){
             if(ninjamanpos.left < pumpkins[index].left){ //enemy right of ninjaman
                 if(world[pumpkins[index].top][pumpkins[index].left - 1] != 1){
                     pumpkins[index].left = pumpkins[index].left -1;
@@ -204,7 +203,9 @@ function movePumpkin(){
                 else {
                     var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
                     if(move == 1){
-                        pumpkins[index].top = pumpkins[index].top +1; //move down
+                        if(world[pumpkins[index].top + 1][pumpkins[index].left] != 6){
+                            pumpkins[index].top = pumpkins[index].top +1;
+                        }//move down
                     }
                     else {
                         pumpkins[index].top = pumpkins[index].top -1; //move up
@@ -218,7 +219,9 @@ function movePumpkin(){
                 else {
                     var move = Math.floor(Math.random() * (2 - 1 + 1) ) + 1;
                     if(move == 1){
-                        pumpkins[index].top = pumpkins[index].top +1; //move down
+                        if(world[pumpkins[index].top + 1][pumpkins[index].left] != 6){
+                            pumpkins[index].top = pumpkins[index].top +1;
+                        } //move down
                     }
                     else {
                         pumpkins[index].top = pumpkins[index].top -1; //move up
@@ -226,8 +229,8 @@ function movePumpkin(){
                 };
             };
         }
-        else if(ninjamanpos.left == pumpkins[index].left){
-            if(ninjamanpos.top > pumpkins[index].top){ //enemy up
+        else if(ninjamanpos.left == pumpkins[index].left && world[pumpkins[index].top - 1][pumpkins[index].left] != 6){
+            if(ninjamanpos.top > pumpkins[index].top && world[pumpkins[index].top + 1][pumpkins[index].left] != 6){ //enemy up
                 if(world[pumpkins[index].top + 1][pumpkins[index].left] != 1){
                     pumpkins[index].top = pumpkins[index].top +1;
                 }
@@ -270,14 +273,29 @@ function movePumpkin(){
             count = 0;
         }
     }
-    
 }
+
+function relesePumpkin0(){
+    pumpkins[0].left = 13;
+    pumpkins[0].top = 11;
+};
+function relesePumpkin1(){
+    pumpkins[1].left = 12;
+    pumpkins[1].top = 11;
+};
+function relesePumpkin2(){
+    pumpkins[2].left = 11;
+    pumpkins[2].top = 11;
+};
 
 function reset(){
     var resetcount = 0;
     for(var row = 0; row < world.length; row++){
         for(var x = 0; x <world[row].length; x++){
-            if(world[row][x] > 1){
+            if(world[row][x] == 2){
+                resetcount = resetcount + 1;
+            }
+            if(world[row][x] == 3){
                 resetcount = resetcount + 1;
             }
         }
@@ -287,7 +305,6 @@ function reset(){
         for(var x = 0; x <world[row].length; x++){
             if(world[row][x] == 0){
                 world[row][x] = 4;
-                newpumpkin = newpumpkin + 1;
             }
         }
     }
@@ -297,16 +314,25 @@ function reset(){
 }
 
 function gameLoop(){
+    // console.log(count);
     count ++;
-    var name = document.getElementById('my_name').innerHTML;
-    socket.emit('score_change', { name: name, score: score, lives: lives, count: count });
     if(lives > 0){
+        var name = document.getElementById('my_name').innerHTML;
+        socket.emit('score_change', { name: name, score: score, lives: lives, count: count });
+        if(count == 7){
+            relesePumpkin0();
+        };
+        if(count == 16){
+            relesePumpkin1();
+        };
+        if(count == 30){
+            relesePumpkin2();
+        };
         if(count > 6){
-            moveNinja();
             movePumpkin();
             drawPumpkin();
             reset();
-        }
+        };
     }
     else{
         document.getElementById('gameover').innerHTML = "GAME OVER"
