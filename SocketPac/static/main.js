@@ -318,8 +318,8 @@ function reset(){
 function gameLoop(){
     // console.log(count);
     count ++;
+    var name = document.getElementById('my_name').innerHTML;
     if(lives > 0){
-        var name = document.getElementById('my_name').innerHTML;
         socket.emit('score_change', { name: name, score: score, lives: lives, count: count });
         if(count == 7){
             relesePumpkin0();
@@ -337,9 +337,10 @@ function gameLoop(){
         };
     }
     else{
+        socket.emit('game_over', { name: name, score: score, lives: 0, count: count });
         document.getElementById('gameover').innerHTML = "GAME OVER"
     } 
-
+    
     setTimeout(gameLoop, 500);
 }
 gameLoop();

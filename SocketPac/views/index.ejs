@@ -42,7 +42,11 @@
                         html_str += '<div class="name">'+data[i]['name']+' Score = '+data[i]['score']+' Lives = '+data[i]['lives']+'</div>';
                     }
                     else{
-                        if(data[i]['count'] < 2){
+                        console.log(data[i]['lives'])
+                        if(data[i]['lives'] == 0){
+                            $('#counter').html("GAME OVER!")
+                        }
+                        else if(data[i]['count'] < 2){
                             $('#counter').html("3")
                         }
                         else if(data[i]['count'] < 4){
