@@ -11,7 +11,7 @@
             var socket = io(); //1
     
             socket.on('greeting', function (data) { //4
-                console.log(data.msg); //5
+                // console.log(data.msg); //5
                 socket.emit('thankyou', { msg: 'Thank you for connecting me! -Client' }); //6
             });
             
@@ -20,7 +20,7 @@
                 $('#my_name').html(data.name);
             });
             socket.on('existing_users', function(data){
-                console.log(data);
+                // console.log(data);
                 var html_str = "";
                 for(var i = 0; i < data.length; i++){
                     if(data[i]['name'] != name){
@@ -30,7 +30,7 @@
                 $('#scoreboard').html(html_str);
             });
             socket.on('new_player', function(data){
-                console.log(data.new_user);
+                // console.log(data.new_user);
                 $('#scoreboard').append('<div class="name">'+data.name+' Score = '+data.score+' Lives = '+data['lives']+'</div>');
             });
             
@@ -63,7 +63,7 @@
             });
 
             socket.on('disconnect', function(){
-                console.log("Disconnecting!")
+                // console.log("Disconnecting!")
                 var html_str = "";
                 for(var i = 0; i < data.length; i++){
                     if(data[i]['name'] != name){
@@ -81,33 +81,39 @@
             $('#logout').click(function(){
                 socket.emit('logout', { name: name })
             });
+<<<<<<< HEAD
+            $('#logout').click(function(){
+                socket.emit('logout', { name: name })
+            });
+=======
 
+>>>>>>> upstream/master
             $('#up_btn').click(function(){
-                console.log("Clicked up button!");
+                // console.log("Clicked up button!");
                 var e = jQuery.Event("keyup");
                 e.which = 38;
                 $(document).trigger(e);
             });
 
             $('#down_btn').click(function(){
-                console.log("Clicked down button!");
+                // console.log("Clicked down button!");
                 var e = jQuery.Event("keyup");
                 e.which = 40;
                 $(document).trigger(e);
             });
 
             $('#left_btn').click(function(){
-                console.log("Clicked left button!");
+                // console.log("Clicked left button!");
                 var e = jQuery.Event("keyup");
                 e.which = 37;
                 $(document).trigger(e);
             });
 
             $('#right_btn').click(function(){
-                console.log("Clicked right button!");
+                // console.log("Clicked right button!");
                 var e = jQuery.Event("keyup");
                 e.which = 39;
-                console.log(e);
+                // console.log(e);
                 $(document).trigger(e);
             });
         })
