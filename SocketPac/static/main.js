@@ -39,6 +39,8 @@ var worldDict = {
 };
 var socket = io();
 
+var socket = io();
+
 var score = 0, lives = 3;
 
 function drawWorld(){

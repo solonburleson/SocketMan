@@ -61,6 +61,7 @@
                 }
                 $('#scoreboard').html(html_str);
             });
+
             socket.on('disconnect', function(){
                 // console.log("Disconnecting!")
                 var html_str = "";
@@ -72,30 +73,42 @@
                 $('#scoreboard').html(html_str);
                 socket.disconnect();
             });
+
             $('#logout').click(function(){
                 socket.emit('logout', { name: name })
             });
+
             $('#logout').click(function(){
                 socket.emit('logout', { name: name })
             });
+<<<<<<< HEAD
+            $('#logout').click(function(){
+                socket.emit('logout', { name: name })
+            });
+=======
+
+>>>>>>> upstream/master
             $('#up_btn').click(function(){
                 // console.log("Clicked up button!");
                 var e = jQuery.Event("keyup");
                 e.which = 38;
                 $(document).trigger(e);
             });
+
             $('#down_btn').click(function(){
                 // console.log("Clicked down button!");
                 var e = jQuery.Event("keyup");
                 e.which = 40;
                 $(document).trigger(e);
             });
+
             $('#left_btn').click(function(){
                 // console.log("Clicked left button!");
                 var e = jQuery.Event("keyup");
                 e.which = 37;
                 $(document).trigger(e);
             });
+
             $('#right_btn').click(function(){
                 // console.log("Clicked right button!");
                 var e = jQuery.Event("keyup");
