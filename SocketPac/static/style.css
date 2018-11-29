@@ -117,22 +117,33 @@
     touch-action: manipulation;
 }
 #scoreboard{
+    max-height: 140px;
+    width: 300px;
     display: inline-block;
     vertical-align: top;
     background-color: black;
     touch-action: manipulation;
+}
+#total-score{
+    display: inline-block;
+    width: 300px;
+    overflow: scroll;
 }
 #pumpkins{
     display: inline;
     touch-action: manipulation;
 }
 #my_score{
+    display: inline-block;
+    width: 300px;
     color: lightgreen;
     border: 2px solid lightgreen;
     margin-bottom: 2%;
     touch-action: manipulation;
 }
-
+#my_name{
+    overflow: hidden;
+}
 .name{
     color: white;
     touch-action: manipulation;
@@ -224,6 +235,9 @@
     .move-btn{
         touch-action: manipulation;
     }
+    #logout{
+        padding: 20px;
+    }
 }
 
 @media only screen and (min-width: 481px) {
@@ -242,11 +256,17 @@
     .move-btn{
         touch-action: manipulation;
     }
+    #logout{
+        padding: 20px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
     #d-pad{
         display: none;
+    }
+    #logout{
+        padding: 1%;
     }
 }
 
